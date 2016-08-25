@@ -29,5 +29,5 @@ class Ticket(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "{} - {}".format(User.object.filter(pk=self.user).username,
-                                Event.object.filter(pk=self.event).name)
+        return "{} - {}".format(self.user,
+                                self.event)
