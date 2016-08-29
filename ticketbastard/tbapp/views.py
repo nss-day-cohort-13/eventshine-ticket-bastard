@@ -8,6 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 
 # Create your views here.
+
 class IndexView(generic.TemplateView):
     template_name = "index.html"
 
