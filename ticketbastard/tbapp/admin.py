@@ -5,11 +5,11 @@ from .models import Venue, Event, Ticket
 
 
 class VenueAdmin(admin.ModelAdmin):
-    list_display = ('name')
+    list_display = ("name")
 
 
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('name')
+    list_display = ("name")
 
 
 admin.site.register(Venue)
