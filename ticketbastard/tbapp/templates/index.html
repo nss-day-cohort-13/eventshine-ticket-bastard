@@ -6,32 +6,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Test Forms</title>
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="{% static 'bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
 </head>
 <body ng-app="tbapp">
-    <div ng-controller="EventCtrl as ctrl">
 
-        <form name="createEvent" ng-submit="ctrl.submitEventForm()">
-            <label>Name</label>
-            <input type="text" name="name" ng-model="ctrl.event.name">
-            <label>Description</label>
-            <input type="text" name="description" ng-model="ctrl.event.description">
-            <label>Start Time</label>
-            <input type="text" name="start_time" ng-model="ctrl.event.start_time">
-            <label>End Time</label>
-            <input type="text" name="end_time" ng-model="ctrl.event.end_time">
-            <label>Max Tickets</label>
-            <input type="text" name="end_time" ng-model="ctrl.event.max_tickets">
-            <label>Venue</label>
-            <input type="text" name="venue" ng-model="ctrl.event.venue">
-            <button type="submit">Submit</button>
-        </form>
-
-    </div>
+    <div ng-view class="ngview"></div>
 
     <script src="{% static 'bower_components/angular/angular.min.js' %}"></script>
-
+    <script src="{% static 'bower_components/angular-bootstrap/ui-bootstrap.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'bower_components/angular-route/angular-route.min.js' %}" type="text/javascript"></script>
     <script src="{% static 'app/app.js' %}"></script>
     <script src="{% static 'app/controllers/EventCtrl.js' %}"></script>
+    <script src="{% static 'app/main.config.js' %}" type="text/javascript"></script>
 </body>
 </html>

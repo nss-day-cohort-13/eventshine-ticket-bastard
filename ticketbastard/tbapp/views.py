@@ -55,7 +55,8 @@ def create_event(request):
                       max_tickets=max_tickets,
                       venue=venue)
     event_obj.save()
-    return HttpResponse("You did it buddy.", content_type='text')
+
+    return HttpResponseRedirect(reverse("tbapp:index"))
 
 
 

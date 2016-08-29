@@ -1,5 +1,5 @@
 var app = angular
-  .module("tbapp", [])
+  .module("tbapp", ["ngRoute"])
   .config(function($interpolateProvider) {
     $interpolateProvider.startSymbol('((');
     $interpolateProvider.endSymbol('))');
