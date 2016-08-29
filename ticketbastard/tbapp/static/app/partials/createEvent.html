@@ -1,0 +1,19 @@
+<div ng-controller="EventCtrl as events">
+
+    <form name="createEvent" ng-submit="events.submitEventForm()">
+        <label>Name</label>
+        <input type="text" name="name" ng-model="events.event.name">
+        <label>Description</label>
+        <input type="text" name="description" ng-model="events.event.description">
+        <label>Start Time</label>
+        <input type="text" name="start_time" ng-model="events.event.start_time">
+        <label>End Time</label>
+        <input type="text" name="end_time" ng-model="events.event.end_time">
+        <label>Max Tickets</label>
+        <input type="text" name="end_time" ng-model="events.event.max_tickets">
+        <label>Venue</label>
+        <input type="text" name="venue" ng-model="events.event.venue">
+        <button type="submit">Submit</button>
+    </form>
+
+</div>

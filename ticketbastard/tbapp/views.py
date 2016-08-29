@@ -8,6 +8,10 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 
 # Create your views here.
+class IndexView(generic.TemplateView):
+    template_name = 'index.html'
+
+
 def all_events_view(request):
     events = Event.objects.all()
     data = serializers.serialize('json', events)
@@ -51,4 +55,9 @@ def create_event(request):
                       max_tickets=max_tickets,
                       venue=venue)
     event_obj.save()
-    return HttpResponse("You did it buddy.", content_type='application/json')
+
+    return HttpResponseRedirect(reverse("tbapp:index"))
+
+
+
+
