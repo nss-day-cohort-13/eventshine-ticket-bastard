@@ -4,6 +4,8 @@ from django.urls import reverse
 from django.views import generic
 from django.core import serializers
 from .models import Venue, Event, Ticket, User
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 # Create your views here.
 def all_events_view(request):
@@ -29,3 +31,24 @@ def all_users_view(request):
     data = serializers.serialize('json', users)
 
     return HttpResponse(data, content_type='application/json')
+
+
+@csrf_exempt
+def create_event(request):
+    data = json.loads(request.body.decode('utf-8'))
+
+    name = data['name']
+    description = data['description']
+    start_time = data['start_time']
+    end_time = data['end_time']
+    max_tickets = data['max_tickets']
+    venue = Venue.objects.get(pk=data['venue'])
+
+    event_obj = Event(name=name,
+                      description=description,
+                      start_time=start_time,
+                      end_time=end_time,
+                      max_tickets=max_tickets,
+                      venue=venue)
+    event_obj.save()
+    return HttpResponse("You did it buddy.", content_type='application/json')
