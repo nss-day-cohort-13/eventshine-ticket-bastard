@@ -9,44 +9,44 @@ import json
 
 # Create your views here.
 class IndexView(generic.TemplateView):
-    template_name = 'index.html'
+    template_name = "index.html"
 
 
 def all_events_view(request):
     events = Event.objects.all()
-    data = serializers.serialize('json', events)
+    data = serializers.serialize("json", events)
 
-    return HttpResponse(data, content_type='application/json')
+    return HttpResponse(data, content_type="application/json")
 
 def all_venues_view(request):
     venues = Venue.objects.all()
-    data = serializers.serialize('json', venues)
+    data = serializers.serialize("json", venues)
 
-    return HttpResponse(data, content_type='application/json')
+    return HttpResponse(data, content_type="application/json")
 
 def all_tickets_view(request):
     tickets = Ticket.objects.all()
-    data = serializers.serialize('json', tickets)
+    data = serializers.serialize("json", tickets)
 
-    return HttpResponse(data, content_type='application/json')
+    return HttpResponse(data, content_type="application/json")
 
 def all_users_view(request):
     users = User.objects.all()
-    data = serializers.serialize('json', users)
+    data = serializers.serialize("json", users)
 
-    return HttpResponse(data, content_type='application/json')
+    return HttpResponse(data, content_type="application/json")
 
 
 @csrf_exempt
 def create_event(request):
-    data = json.loads(request.body.decode('utf-8'))
+    data = json.loads(request.body.decode("utf-8"))
 
-    name = data['name']
-    description = data['description']
-    start_time = data['start_time']
-    end_time = data['end_time']
-    max_tickets = data['max_tickets']
-    venue = Venue.objects.get(pk=data['venue'])
+    name = data["name"]
+    description = data["description"]
+    start_time = data["start_time"]
+    end_time = data["end_time"]
+    max_tickets = data["max_tickets"]
+    venue = Venue.objects.get(pk=data["venue"])
 
     event_obj = Event(name=name,
                       description=description,
@@ -57,7 +57,3 @@ def create_event(request):
     event_obj.save()
 
     return HttpResponseRedirect(reverse("tbapp:index"))
-
-
-
-
