@@ -1,0 +1,37 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Test Forms</title>
+    <link rel="stylesheet" href="">
+</head>
+<body ng-app="tbapp">
+    <div ng-controller="EventCtrl as ctrl">
+
+        <form name="createEvent" ng-submit="ctrl.submitEventForm()">
+            <label>Name</label>
+            <input type="text" name="name" ng-model="ctrl.event.name">
+            <label>Description</label>
+            <input type="text" name="description" ng-model="ctrl.event.description">
+            <label>Start Time</label>
+            <input type="text" name="start_time" ng-model="ctrl.event.start_time">
+            <label>End Time</label>
+            <input type="text" name="end_time" ng-model="ctrl.event.end_time">
+            <label>Max Tickets</label>
+            <input type="text" name="end_time" ng-model="ctrl.event.max_tickets">
+            <label>Venue</label>
+            <input type="text" name="venue" ng-model="ctrl.event.venue">
+            <button type="submit">Submit</button>
+        </form>
+
+    </div>
+
+    <script src="{% static 'bower_components/angular/angular.min.js' %}"></script>
+
+    <script src="{% static 'app/app.js' %}"></script>
+    <script src="{% static 'app/controllers/EventCtrl.js' %}"></script>
+</body>
+</html>
