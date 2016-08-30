@@ -49,12 +49,16 @@ def create_event(request):
     max_tickets = data["max_tickets"]
     venue = Venue.objects.get(pk=data["venue"])
 
-    event_obj = Event(name=name,
-                      description=description,
-                      start_time=start_time,
-                      end_time=end_time,
-                      max_tickets=max_tickets,
-                      venue=venue)
-    event_obj.save()
+    try:
+        event_obj = Event(name=name,
+                          description=description,
+                          start_time=start_time,
+                          end_time=end_time,
+                          # max_tickets=max_tickets,
+                          venue=venue)
+        event_obj.save()
 
-    return HttpResponse(status=200)
+        return HttpResponse(new_user, status=200)
+
+    except IntegrityError:
+        return HttpResponse(status=400)
