@@ -87,3 +87,19 @@ def create_event(request):
 
     except IntegrityError:
         return HttpResponse(status=400)
+
+
+def create_venue(request):
+    data = json.loads(request.body.decode("utf-8"))
+    name = data["name"]
+    city = data["city"]
+
+    try:
+        venue_obj = Venue(name=name,
+                          city=city)
+        venue_obj.save()
+
+        return HttpResponse(status=200)
+
+    except IntegrityError:
+        return HttpResponse(status=400)
