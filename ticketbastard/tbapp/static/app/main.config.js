@@ -40,5 +40,10 @@ app.config(($routeProvider) => (
         controllerAs: "pastEvents",
         templateUrl: "../static/app/partials/pastEvents.html"
       })
+      .when("/createVenue", {
+        controller: "VenueCtrl",
+        controllerAs: "venues",
+        templateUrl: "../static/app/partials/createVenue.html"
+      })
       .otherwise("/")
   ));
