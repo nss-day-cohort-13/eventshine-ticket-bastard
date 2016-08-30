@@ -11,7 +11,8 @@ app.controller("LoginCtrl", function($http, $location) {
         data: login.auth_user,
         headers: {
           "Content-Type": "application/json"}
-      });
+      })
+      .then(res => console.error(res));
     };
 
     login.register = () => {
