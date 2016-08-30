@@ -25,6 +25,7 @@ app.controller("ViewEventsCtrl", function($http, $uibModal) {
           {"event": event.pk, "count": count},
           {headers: {"Content-Type": "application/json"}})
         .then(resp => console.log(resp))
+        .then(() => alert(`${count} tickets purchased for ${event.fields.name}.`))
         .catch(err => console.error(err))
       }, () => {});
     };
