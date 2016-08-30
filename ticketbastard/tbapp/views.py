@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.views import generic
 from django.core import serializers
+from django.db.utils import IntegrityError
 from .models import Venue, Event, Ticket, User
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -39,6 +40,20 @@ def all_users_view(request):
 
 
 @csrf_exempt
+def register_user(request):
+    print(request)
+    print(request.body)
+    try:
+        user_data = json.loads(request.body.decode("utf-8"))
+        new_user = User.objects.create_user(user_data["username"],
+                                            user_data["email"],
+                                            user_data["password"])
+        return HttpResponse(new_user, status=200)
+    except IntegrityError:
+        return HttpResponse(status=400)
+
+
+@csrf_exempt
 def create_event(request):
     data = json.loads(request.body.decode("utf-8"))
 
@@ -49,12 +64,16 @@ def create_event(request):
     max_tickets = data["max_tickets"]
     venue = Venue.objects.get(pk=data["venue"])
 
-    event_obj = Event(name=name,
-                      description=description,
-                      start_time=start_time,
-                      end_time=end_time,
-                      max_tickets=max_tickets,
-                      venue=venue)
-    event_obj.save()
+    try:
+        event_obj = Event(name=name,
+                          description=description,
+                          start_time=start_time,
+                          end_time=end_time,
+                          max_tickets=max_tickets,
+                          venue=venue)
+        event_obj.save()
 
-    return HttpResponseRedirect(reverse("tbapp:index"))
+        return HttpResponse(new_user, status=200)
+
+    except IntegrityError:
+        return HttpResponse(status=400)
