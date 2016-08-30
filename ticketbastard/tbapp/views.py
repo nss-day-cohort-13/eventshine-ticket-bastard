@@ -40,6 +40,20 @@ def all_users_view(request):
 
 
 @csrf_exempt
+def register_user(request):
+    print(request)
+    print(request.body)
+    try:
+        user_data = json.loads(request.body.decode("utf-8"))
+        new_user = User.objects.create_user(user_data["username"],
+                                            user_data["email"],
+                                            user_data["password"])
+        return HttpResponse(new_user, status=200)
+    except IntegrityError:
+        return HttpResponse(status=400)
+
+
+@csrf_exempt
 def create_event(request):
     data = json.loads(request.body.decode("utf-8"))
 

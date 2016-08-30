@@ -10,4 +10,5 @@ urlpatterns = [
     url(r"^tickets$", views.all_tickets_view, name="tickets"),
     url(r"^users$", views.all_users_view, name="users"),
     url(r"^create_event$", views.create_event, name="create_event"),
+    url(r"^register_user$", views.register_user, name="register_user"),
 ]
