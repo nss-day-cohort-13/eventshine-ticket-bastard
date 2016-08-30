@@ -1,5 +1,12 @@
-<div ng-repeat="event in events">
-    <div>((event.fields.name))</div>
-        <ul>
-            <li>((event.fields.description))</li>
+<h1>Events</h1>
+<div ng-repeat="event in viewEvents.events">
+    <h3>((event.fields.name))</h3>
+    <div>((event.fields.description))</div>
+
+    <div ng-repeat="v in viewEvents.venues">
+        <div ng-if="event.fields.venue == v.pk"> at ((v.fields.name))</div>
+    </div>
+    </div>
 </div>
+
+

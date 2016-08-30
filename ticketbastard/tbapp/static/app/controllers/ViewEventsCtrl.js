@@ -1,10 +1,11 @@
-app.controller("ViewEventsCtrl", function($http, $scope) {
+app.controller("ViewEventsCtrl", function($http) {
     const viewEvents = this;
-    $scope.events = undefined
 
     $http.get("http://127.0.0.1:8000/tbapp/events")
-    .then(function(response) {
-        $scope.events = response.data
-        console.log(response.data)
-    });
+    .then((response) => viewEvents.events = response.data);
+
+    $http.get("http://127.0.0.1:8000/tbapp/venues")
+    .then((response) => viewEvents.venues = response.data);
+
+
 })
