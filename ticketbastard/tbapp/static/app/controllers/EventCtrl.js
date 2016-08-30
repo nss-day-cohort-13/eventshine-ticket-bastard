@@ -9,6 +9,7 @@ app.controller("EventCtrl", function($http, $location) {
         $http.post("http://127.0.0.1:8000/tbapp/create_event",
             events.event,
             {headers:{"Content-Type": "application/json"}})
-        .then($location.path('/'));
+        .then($location.path('/'))
+        .catch(err => console.error(err));
     };
 });
