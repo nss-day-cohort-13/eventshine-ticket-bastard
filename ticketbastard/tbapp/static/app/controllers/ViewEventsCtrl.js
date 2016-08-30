@@ -9,4 +9,11 @@ app.controller("ViewEventsCtrl", function($http) {
 
     viewEvents.date = new Date().toISOString();
 
+    viewEvents.purchase = event => {
+      $http.post("http://localhost:8000/tbapp/purchase_tickets",
+        {"event": event.pk, "count": 2},
+        {headers: {"Content-Type": "application/json"}})
+      .then(resp => console.log(resp))
+      .catch(err => console.error(err))
+    };
 })
