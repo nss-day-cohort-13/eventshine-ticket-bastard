@@ -2,10 +2,14 @@
 <div ng-repeat="event in viewEvents.events">
     <h3>((event.fields.name))</h3>
     <div>((event.fields.description))</div>
+    <div>Starts: ((event.fields.start_time | date:"MM/dd/yyyy @ h:mma"))</div>
+    <div>Ends: ((event.fields.end_time | date:"MM/dd/yyyy @ h:mma"))</div>
 
     <div ng-repeat="v in viewEvents.venues">
-        <div ng-if="event.fields.venue == v.pk"> at ((v.fields.name))</div>
+        <div ng-if="event.fields.venue == v.pk"> At: ((v.fields.name))</div>
     </div>
+
+    <button>Purchase Tickets</button>
     </div>
 </div>
 
