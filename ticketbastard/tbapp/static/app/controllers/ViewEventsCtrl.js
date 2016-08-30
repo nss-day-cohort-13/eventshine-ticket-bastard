@@ -7,5 +7,6 @@ app.controller("ViewEventsCtrl", function($http) {
     $http.get("http://127.0.0.1:8000/tbapp/venues")
     .then((response) => viewEvents.venues = response.data);
 
+    viewEvents.date = new Date().toISOString();
 
 })
