@@ -1,5 +1,5 @@
 var app = angular
-  .module("tbapp", ["ngRoute"])
+  .module("tbapp", ["ngRoute", "ui.bootstrap"])
   .config(function($interpolateProvider, $httpProvider) {
     $httpProvider.defaults.xsrfCookieName = 'csrftoken';
     $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
