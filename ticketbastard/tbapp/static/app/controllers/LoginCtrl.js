@@ -6,7 +6,7 @@ app.controller("LoginCtrl", function($http, $location) {
 
     login.login = () => {
       $http({
-        url: "http://127.0.0.1:8000/tbapp/login",
+        url: "http://localhost:8000/tbapp/login",
         method: "POST",
         data: login.auth_user,
         headers: {

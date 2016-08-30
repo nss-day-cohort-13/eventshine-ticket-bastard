@@ -83,7 +83,7 @@ def create_event(request):
                           venue=venue)
         event_obj.save()
 
-        return HttpResponse(new_user, status=200)
+        return HttpResponse(status=200)
 
     except IntegrityError:
         return HttpResponse(status=400)
