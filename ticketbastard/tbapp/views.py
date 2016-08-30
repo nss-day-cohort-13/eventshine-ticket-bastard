@@ -57,4 +57,4 @@ def create_event(request):
                       venue=venue)
     event_obj.save()
 
-    return HttpResponseRedirect(reverse("tbapp:index"))
+    return HttpResponse(status=200)

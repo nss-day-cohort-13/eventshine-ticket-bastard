@@ -1,8 +1,5 @@
-app.controller("EventCtrl", function($http) {
+app.controller("EventCtrl", function($http, $location) {
     const events = this;
-
-
-// 2016-08-29T00:00:00Z
 
     $http.get("http://127.0.0.1:8000/tbapp/venues")
         .then((response) => events.venues = response.data);
@@ -11,7 +8,7 @@ app.controller("EventCtrl", function($http) {
     events.submitEventForm = function () {
         $http.post("http://127.0.0.1:8000/tbapp/create_event",
             events.event,
-            {headers:{"Content-Type": "application/json"}});
+            {headers:{"Content-Type": "application/json"}})
+        .then($location.path('/'));
     };
 });
-
