@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, HttpRequest
+from django.contrib.auth import authenticate, login
 from django.urls import reverse
 from django.views import generic
 from django.core import serializers
@@ -13,6 +14,17 @@ import json
 class IndexView(generic.TemplateView):
     template_name = "index.html"
 
+def login_view(request):
+    print(request.body)
+    data = json.loads(request.body.decode("utf-8"))
+    username = data['username']
+    password = data['password']
+    user = authenticate(username=username, password=password)
+    if user is not None:
+        login(request, user)
+        return HttpResponse(status=200)
+    else:
+        return HttpResponse(status=400)
 
 def all_events_view(request):
     events = Event.objects.all()
@@ -39,7 +51,6 @@ def all_users_view(request):
     return HttpResponse(data, content_type="application/json")
 
 
-@csrf_exempt
 def register_user(request):
     print(request)
     print(request.body)
@@ -53,7 +64,6 @@ def register_user(request):
         return HttpResponse(status=400)
 
 
-@csrf_exempt
 def create_event(request):
     data = json.loads(request.body.decode("utf-8"))
 
