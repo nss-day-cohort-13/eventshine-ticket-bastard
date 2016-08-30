@@ -1,0 +1,18 @@
+<!-- LOGIN CARD -->
+<div class="container">
+  <h1>Login</h1>
+  <form ng-submit="login.login()">
+    <input
+    class="form-control"
+    placeholder="Username"
+    ng-model="login.username"
+    />
+    <input
+    class="form-control"
+    type="password" placeholder="Password"
+    ng-model="login.password"
+    />
+    <button type="submit">Login</button>
+  </form>
+  <a ng-click="login.register()">Create new account</a>
+</div>
