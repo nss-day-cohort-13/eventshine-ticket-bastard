@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.views import generic
 from django.core import serializers
+from django.db.utils import IntegrityError
 from .models import Venue, Event, Ticket, User
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -54,7 +55,7 @@ def create_event(request):
                           description=description,
                           start_time=start_time,
                           end_time=end_time,
-                          # max_tickets=max_tickets,
+                          max_tickets=max_tickets,
                           venue=venue)
         event_obj.save()
 
