@@ -44,10 +44,10 @@ def register_user(request):
     print(request.body)
     try:
         user_data = json.loads(request.body.decode("utf-8"))
-        User.objects.create_user(user_data["username"],
-                                 user_data["email"],
-                                 user_data["password"])
-        return HttpResponse(request.body, content_type="application/json", status=200)
+        new_user = User.objects.create_user(user_data["username"],
+                                            user_data["email"],
+                                            user_data["password"])
+        return HttpResponse(new_user, status=200)
     except IntegrityError:
         return HttpResponse(status=400)
 
