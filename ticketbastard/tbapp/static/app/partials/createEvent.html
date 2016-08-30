@@ -1,41 +1,81 @@
 <div class="container">
+  <h1 class="text-center">Create an Event</h1>
 
-    <form name="createEvent" ng-submit="events.submitEventForm()">
+    <form name="createEvent"
+          ng-submit="events.submitEventForm()"
+          class="form-horizontal col-sm-6 col-sm-offset-2">
         <div class="form-group">
-            <label>Name</label>
-            <input type="text" name="name" class="form-control" ng-model="events.event.name">
+            <label class="control-label col-sm-4">Name:</label>
+            <div class="col-sm-8">
+                <input type="text"
+                       name="name"
+                       class="form-control"
+                       ng-model="events.event.name"
+                       required>
+            </div>
         </div>
 
         <div class="form-group">
-            <label>Description</label>
-            <input type="text" name="description" class="form-control" ng-model="events.event.description">
+            <label class="control-label col-sm-4">Description:</label>
+            <div class="col-sm-8">
+                <input type="text"
+                       name="description"
+                       class="form-control"
+                       ng-model="events.event.description"
+                       required>
+            </div>
         </div>
 
         <div class="form-group">
-            <label>Start Time</label>
-            <input type="text" name="start_time" class="form-control" ng-model="events.event.start_time">
+            <label class="control-label col-sm-4">Start Date and Time:</label>
+            <div class="col-sm-8">
+                <input type="datetime-local"
+                       name="start_time"
+                       class="form-control"
+                       ng-model="events.event.start_time"
+                       required>
+            </div>
         </div>
 
         <div class="form-group">
-            <label>End Time</label>
-            <input type="text" name="end_time" class="form-control" ng-model="events.event.end_time">
+            <label class="control-label col-sm-4">End Date and Time:</label>
+            <div class="col-sm-8">
+                <input type="datetime-local"
+                       name="end_time"
+                       class="form-control"
+                       ng-model="events.event.end_time"
+                       required>
+            </div>
+       </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-4">Max Tickets:</label>
+            <div class="col-sm-8">
+                <input type="text"
+                       name="end_time"
+                       class="form-control"
+                       ng-model="events.event.max_tickets"
+                       required>
+            </div>
         </div>
 
         <div class="form-group">
-            <label>Max Tickets</label>
-            <input type="text" name="end_time" class="form-control" ng-model="events.event.max_tickets">
+            <label class="control-label col-sm-4">Venue:</label>
+            <div class="col-sm-8">
+                <select name="venue"
+                        class="select-input form-control"
+                        ng-model="events.event.venue"
+                        ng-options="venue.pk as venue.fields.name + ' - ' + venue.fields.city for venue in events.venues"
+                        required>
+                        <option value="">-- choose venue --</option>
+                </select>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label>Venue</label>
-            <select class="select-input form-control" class="form-control" ng-model="events.event.venue">
-                <option ng-repeat="venue in events.venues"
-                        value="((venue.pk))">((venue.fields.name)), ((venue.fields.city))
-                </option>
-            </select>
+        <div class="text-right">
+            <button type="submit"
+                    class="btn btn-primary">Submit
+            </button>
         </div>
-
-        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-
 </div>
