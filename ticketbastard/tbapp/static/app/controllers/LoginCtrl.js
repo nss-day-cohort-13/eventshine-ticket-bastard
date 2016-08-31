@@ -14,9 +14,7 @@ app.controller("LoginCtrl", function($http, $location, $uibModal) {
       })
       .then(res => conflict_events = res.data)
       .then(function(conflict_events) {
-        if (conflict_events.length > 0){
           login.warning(conflict_events);
-        }
       });
     };
 
@@ -33,7 +31,8 @@ app.controller("LoginCtrl", function($http, $location, $uibModal) {
       resolve: {
           conflict_events: () => conflict_events
         }
-      })
-    }
-
+      });
+      modal.result.then(() => {},
+                        () => $location.path('/'));
+    };
   });

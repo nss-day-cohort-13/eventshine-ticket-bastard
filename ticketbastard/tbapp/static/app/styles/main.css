@@ -1,0 +1,16 @@
+body {
+    background-color: #E9EBF3;
+}
+.navbar {
+    border-radius: 0;
+}
+.home-title {
+    color: #283A90;
+    font-size: 8em;
+    margin: 1em 0;
+}
+
+.home-sub-title {
+    color: #283A90;
+    font-size: 3em;
+}
