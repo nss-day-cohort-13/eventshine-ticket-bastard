@@ -7,9 +7,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Ticket Bastard</title>
         <link rel="stylesheet" href="{% static 'bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'app/styles/main.css' %}">
     </head>
     <body ng-app="tbapp">
-
+        <ng-include src="'{% static 'app/partials/navbar.html' %}'"></ng-include>
         <div ng-view class="ngview"></div>
 
         <!-- Bower Components -->

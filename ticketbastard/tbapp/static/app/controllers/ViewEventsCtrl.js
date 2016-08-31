@@ -1,4 +1,4 @@
-app.controller("ViewEventsCtrl", function($http, $uibModal) {
+app.controller("ViewEventsCtrl", function($http, $uibModal, $location) {
     const viewEvents = this;
 
     $http.get("http://localhost:8000/tbapp/events")
@@ -26,6 +26,7 @@ app.controller("ViewEventsCtrl", function($http, $uibModal) {
           {headers: {"Content-Type": "application/json"}})
         .then(resp => console.log(resp))
         .then(() => alert(`${count} tickets purchased for ${event.fields.name}.`))
+        .then(() => $location.path('/'))
         .catch(err => console.error(err))
       }, () => {});
     };
