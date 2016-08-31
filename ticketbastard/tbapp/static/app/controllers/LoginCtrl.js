@@ -1,7 +1,4 @@
-//*****Login Ctrl*****//
-
-
-app.controller("LoginCtrl", function($http, $location, $uibModal) {
+app.controller("LoginCtrl", function($http, $location, $uibModal, authFactory) {
     const login = this;
 
     login.login = () => {
@@ -13,9 +10,8 @@ app.controller("LoginCtrl", function($http, $location, $uibModal) {
           "Content-Type": "application/json"}
       })
       .then(res => conflict_events = res.data)
-      .then(function(conflict_events) {
-          login.warning(conflict_events);
-      });
+      .then(conflict_events => login.warning(conflict_events))
+      .then(() => authFactory.user.current = login.auth_user);
     };
 
     login.register = () => {
