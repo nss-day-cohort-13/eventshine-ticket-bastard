@@ -7,6 +7,6 @@ app.controller("RegisterCtrl", function($http, $location) {
       {headers: {"Content-Type": "application/json"}})
         .then(resp => console.log(resp))
         .then(() => $location.path("/"))
-        .catch(err => console.error(err))
+        .catch(err => console.error(err));
   };
 });
