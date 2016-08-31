@@ -1,0 +1,9 @@
+<div class="modal-body">
+  <h2>((purchase.event.fields.name))</h2>
+  <div class="form-group">
+    <label for="ticket-count" class="control-label">Amount:</label>
+    <input type="number" id="ticket-count" class="form-control" ng-model="purchase.count" />
+  </div>
+  <input type="button" class="btn btn-error" value="cancel" ng-click="purchase.cancel()" />
+  <input type="button" class="btn btn-primary" value="confirm" ng-click="purchase.confirm()" />
+</div>

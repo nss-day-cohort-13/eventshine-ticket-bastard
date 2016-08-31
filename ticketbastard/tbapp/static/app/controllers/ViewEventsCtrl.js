@@ -1,4 +1,4 @@
-app.controller("ViewEventsCtrl", function($http) {
+app.controller("ViewEventsCtrl", function($http, $uibModal) {
     const viewEvents = this;
 
     $http.get("http://localhost:8000/tbapp/events")
@@ -9,4 +9,24 @@ app.controller("ViewEventsCtrl", function($http) {
 
     viewEvents.date = new Date().toISOString();
 
-})
+    viewEvents.purchase = event => {
+      const modal = $uibModal.open({
+        templateUrl: "../static/app/partials/purchaseTicketsModal.html",
+        controller: "PurchaseTicketsModalCtrl",
+        controllerAs: "purchase",
+        size: "sm",
+        resolve: {
+          event: () => event
+        }
+      })
+
+      modal.result.then(count => {
+        $http.post("http://localhost:8000/tbapp/purchase_tickets",
+          {"event": event.pk, "count": count},
+          {headers: {"Content-Type": "application/json"}})
+        .then(resp => console.log(resp))
+        .then(() => alert(`${count} tickets purchased for ${event.fields.name}.`))
+        .catch(err => console.error(err))
+      }, () => {});
+    };
+});

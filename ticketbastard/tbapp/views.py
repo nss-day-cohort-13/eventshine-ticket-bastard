@@ -69,9 +69,19 @@ def all_users_view(request):
     return HttpResponse(data, content_type="application/json")
 
 
+def purchase_tickets(request):
+    user = request.user
+    purchase_info = json.loads(request.body.decode("utf-8"))
+
+    event = Event.objects.get(pk=purchase_info["event"])
+    for i in range(purchase_info["count"]):
+        ticket = Ticket(event=event, user=user)
+        ticket.save()
+
+    return HttpResponse(status=200)
+
+
 def register_user(request):
-    print(request)
-    print(request.body)
     try:
         user_data = json.loads(request.body.decode("utf-8"))
         new_user = User.objects.create_user(user_data["username"],
