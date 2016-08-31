@@ -32,8 +32,6 @@ def login_view(request):
 
         conflict_events = []
 
-        for e in user_events:
-            print(e.start_time)
         # compares each event start time to see if it falls between any other event's start and end times
         for event_to_test in user_events:
             for event_to_compare in user_events:
