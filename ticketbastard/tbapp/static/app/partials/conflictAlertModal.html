@@ -1,0 +1,7 @@
+<div class="modal-body">
+    <h4>Warning! These events are overbooked:</h4>
+    <div ng-repeat="event in warning.conflict_events">
+        <p>((event.fields.name))</p>
+    </div>
+    <input type="button" class="btn btn-warning" value="Close" ng-click="warning.cancel()" />
+</div>

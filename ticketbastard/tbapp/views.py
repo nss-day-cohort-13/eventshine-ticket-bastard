@@ -7,6 +7,7 @@ from django.core import serializers
 from django.db.utils import IntegrityError
 from .models import Venue, Event, Ticket, User
 from django.views.decorators.csrf import csrf_exempt
+from django.core.serializers.json import DjangoJSONEncoder
 import json
 
 # Create your views here.
@@ -22,7 +23,24 @@ def login_view(request):
     user = authenticate(username=username, password=password)
     if user is not None:
         login(request, user)
-        return HttpResponse(status=200)
+
+        # all distinct tickets purchased by the current user
+        user_tickets = Ticket.objects.filter(user=user).values('event').distinct()
+
+        # list of dictionaries of times and ids for each event for the tickets above
+        user_events = Event.objects.filter(id__in=[ticket['event'] for ticket in user_tickets])
+
+        conflict_events = []
+
+        # compares each event start time to see if it falls between any other event's start and end times
+        for event_to_test in user_events:
+            for event_to_compare in user_events:
+                if (event_to_test.id != event_to_compare.id
+                    and event_to_compare.start_time <= event_to_test.start_time <= event_to_compare.end_time):
+                        conflict_events.append(event_to_test)
+
+        data = serializers.serialize("json", conflict_events)
+        return HttpResponse(data, content_type="application/json", status=200)
     else:
         return HttpResponse(status=400)
 
