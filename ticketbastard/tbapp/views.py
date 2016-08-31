@@ -30,14 +30,15 @@ def login_view(request):
         # list of dictionaries of times and ids for each event for the tickets above
         user_events = Event.objects.filter(id__in=[ticket['event'] for ticket in user_tickets])
 
-        conflict_events = []
+        conflict_events = set()
 
         # compares each event start time to see if it falls between any other event's start and end times
         for event_to_test in user_events:
             for event_to_compare in user_events:
                 if (event_to_test.id != event_to_compare.id
-                    and event_to_compare.start_time <= event_to_test.start_time <= event_to_compare.end_time):
-                        conflict_events.append(event_to_test)
+                    and event_to_compare.start_time <= event_to_test.start_time <= event_to_compare.end_time
+                    or event_to_compare.start_time <= event_to_test.end_time <= event_to_compare.end_time):
+                        conflict_events.add(event_to_test)
 
         data = serializers.serialize("json", conflict_events)
         return HttpResponse(data, content_type="application/json", status=200)
