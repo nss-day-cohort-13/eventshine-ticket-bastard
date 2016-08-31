@@ -1,4 +1,4 @@
-app.controller("ViewEventsCtrl", function($http, $uibModal, $timeout) {
+app.controller("ViewEventsCtrl", function($http, $uibModal, $timeout, $location) {
     const viewEvents = this;
 
     $http.get("http://localhost:8000/tbapp/venues")
@@ -39,6 +39,7 @@ app.controller("ViewEventsCtrl", function($http, $uibModal, $timeout) {
           {headers: {"Content-Type": "application/json"}})
         .then(resp => console.log(resp))
         .then(() => alert(`${count} tickets purchased for ${event.fields.name}.`))
+        .then(() => $location.path('/'))
         .catch(err => console.error(err))
       }, () => {});
     };
