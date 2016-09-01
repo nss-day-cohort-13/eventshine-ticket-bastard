@@ -1,4 +1,4 @@
-app.controller("RegisterCtrl", function($http, $location) {
+app.controller("RegisterCtrl", function($http, $location, authFactory) {
   const register = this;
 
   register.submit = () => {
@@ -6,6 +6,7 @@ app.controller("RegisterCtrl", function($http, $location) {
       register.user,
       {headers: {"Content-Type": "application/json"}})
         .then(resp => console.log(resp))
+        .then(() => authFactory.user.current = register.user)
         .then(() => $location.path("/"))
         .catch(err => console.error(err));
   };

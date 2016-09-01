@@ -1,11 +1,12 @@
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse" ng-controller="NavCtrl as nav">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="#/">Ticket Bastard</a>
         </div>
         <ul class="nav navbar-nav pull-right">
             <li><a href="#/">Home</a></li>
-            <li><a href="#/login">Log In</a></li>
+            <li ng-hide="nav.user.current"><a href="#/login">Log In</a></li>
+            <li ng-show="nav.user.current"><a href="" ng-click="nav.logout()">Log Out</a></li>
             <li><a href="#/registerUser">Register</a></li>
             <li><a href="#/createVenue">Create Venue</a></li>
             <li><a href="#/createEvent">Create Event</a></li>

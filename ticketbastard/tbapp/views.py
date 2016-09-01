@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect, HttpResponse, HttpRequest
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.views import generic
 from django.core import serializers
@@ -44,6 +44,10 @@ def login_view(request):
         return HttpResponse(data, content_type="application/json", status=200)
     else:
         return HttpResponse(status=400)
+
+def logout_view(request):
+    logout(request)
+    return HttpResponse(status=200)
 
 def all_events_view(request):
     events = Event.objects.all()

@@ -6,6 +6,7 @@ app_name = "tbapp"
 urlpatterns = [
     url(r"^$", views.IndexView.as_view(), name="index"),
     url(r"^login$", views.login_view, name="login"),
+    url(r"^logout$", views.logout_view, name="logout"),
     url(r"^events$", views.all_events_view, name="events"),
     url(r"^venues$", views.all_venues_view, name="venues"),
     url(r"^tickets$", views.all_tickets_view, name="tickets"),
